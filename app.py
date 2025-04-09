@@ -18,8 +18,20 @@ st.set_page_config(page_title="LLaMA PDF Q&A", page_icon="📄", layout="centere
 # Hide Streamlit MainMenu icon
 st.markdown("""
     <style>
-    #MainMenu, header, footer, .st-emotion-cache-zq5wmm.ezrtsby0 {
-        visibility: hidden;
+    /* Hide Streamlit MainMenu, header toolbar, and footer */
+    #MainMenu, header, footer, [data-testid="stToolbar"] {
+        display: none !important;
+    }
+
+    /* Hide Streamlit branding and anything extra at the bottom */
+    .st-emotion-cache-1dp5vir, .st-emotion-cache-12oz5g7 {
+        display: none !important;
+    }
+
+    /* Remove bottom margin/padding to ensure clean cut-off */
+    .main {
+        padding-bottom: 0px !important;
+        margin-bottom: 0px !important;
     }
     </style>
 """, unsafe_allow_html=True)
