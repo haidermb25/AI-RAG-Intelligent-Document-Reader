@@ -16,16 +16,13 @@ load_dotenv()
 st.set_page_config(page_title="LLaMA PDF Q&A", page_icon="📄", layout="centered")
 
 # Hide Streamlit MainMenu icon
-st.markdown(
-    """
+st.markdown("""
     <style>
-    #MainMenu {
+    #MainMenu, header, footer, .st-emotion-cache-zq5wmm.ezrtsby0 {
         visibility: hidden;
     }
     </style>
-    """,
-    unsafe_allow_html=True
-)
+""", unsafe_allow_html=True)
 
 # Header
 st.markdown("""
