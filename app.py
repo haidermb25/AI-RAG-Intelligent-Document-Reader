@@ -7,6 +7,10 @@ from groq import Groq
 import tempfile
 import re
 import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # Page configuration
 st.set_page_config(page_title="LLaMA PDF Q&A", page_icon="📄", layout="centered")
@@ -26,13 +30,31 @@ uploaded_file = st.file_uploader("📤 Upload your PDF", type=["pdf"])
 @st.cache_resource(ttl=24*3600)
 def load_embedding_model():
     os.makedirs("model_cache", exist_ok=True)
+    hf_token = os.getenv('HF_TOKEN')
+    if not hf_token:
+        st.error("Hugging Face token not found. Please set HF_TOKEN in your environment variables.")
+        st.stop()
+    
     return SentenceTransformer(
         'all-MiniLM-L6-v2',
-        cache_folder="model_cache"
+        cache_folder="model_cache",
+        use_auth_token=hf_token
     )
 
-model = load_embedding_model()
-client = Groq(api_key="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")
+# Initialize Groq client
+def get_groq_client():
+    groq_key = os.getenv('GROQ_API_KEY')
+    if not groq_key:
+        st.error("Groq API key not found. Please set GROQ_API_KEY in your environment variables.")
+        st.stop()
+    return Groq(api_key=groq_key)
+
+try:
+    model = load_embedding_model()
+    client = get_groq_client()
+except Exception as e:
+    st.error(f"Failed to initialize APIs: {str(e)}")
+    st.stop()
 
 # Function to load and split PDF
 def load_and_split_pdf(uploaded_file):
