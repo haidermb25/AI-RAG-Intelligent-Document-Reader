@@ -15,6 +15,17 @@ load_dotenv()
 # Page configuration
 st.set_page_config(page_title="LLaMA PDF Q&A", page_icon="📄", layout="centered")
 
+# Hide Streamlit top-right toolbar (Share, GitHub, etc.)
+hide_streamlit_style = """
+    <style>
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    [data-testid="stToolbar"] {display: none !important;}
+    </style>
+"""
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
 # Header
 st.markdown("""
     <div style="text-align:center;">
