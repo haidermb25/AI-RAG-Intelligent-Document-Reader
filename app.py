@@ -39,7 +39,7 @@ st.markdown("""
 # Header
 st.markdown("""
     <div style="text-align:center;">
-        <h1 style="color:#2E86AB;">📄 Intelligent Document Q&A</h1>
+        <h1 style="color:#2E86AB;">📄 Intelligent RAGify ResumeBot Q&A</h1>
         <p style="font-size:16px;">Upload a PDF, ask questions, and get AI-powered answers based on your document.</p>
     </div>
 """, unsafe_allow_html=True)
